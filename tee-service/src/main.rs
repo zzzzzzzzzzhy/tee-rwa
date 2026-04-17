@@ -1,13 +1,14 @@
+mod api;
 mod crypto;
 
-use axum::Router;
+use axum::{Router, routing::{get, post}};
 use std::net::SocketAddr;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use crypto::TeeKeyPair;
 
-struct AppState {
-    keypair: TeeKeyPair,
+pub struct AppState {
+    pub keypair: TeeKeyPair,
 }
 
 impl AppState {
@@ -24,6 +25,8 @@ async fn main() -> anyhow::Result<()> {
     let state = Arc::new(RwLock::new(AppState::new()?));
     
     let app = Router::new()
+        .route("/quote", get(api::get_quote))
+        .route("/evaluate", post(api::evaluate))
         .with_state(state);
 
     let addr = SocketAddr::from(([0, 0, 0, 0], 8081));
