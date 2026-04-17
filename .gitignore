@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+target/
+
+# Build outputs
+frontend/.next/
+frontend/out/
+backend/target/
+tee-service/target/
+solana-program/target/
+
+# Environment
+.env
+.env.local
+*.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TEE
+tee-service/occlum-instance/
+
+# Solana
+solana-program/node_modules/
+solana-program/.anchor/
+
+# Logs
+*.log
+logs/
+
+# Sealed keys (sensitive)
+sealed/
