@@ -1,4 +1,4 @@
-use k256::ecdsa::{SigningKey, VerifyingKey, Signature};
+use k256::ecdsa::SigningKey;
 use k256::elliptic_curve::sec1::ToEncodedPoint;
 use sha2::{Sha256, Digest};
 use anyhow::Result;
@@ -24,7 +24,7 @@ impl TeeKeyPair {
 
     pub fn sign(&self, message: &[u8]) -> Result<[u8; 64]> {
         let digest = Sha256::digest(message);
-        let (signature, _) = self.signing_key.sign_prehashed_recoverable(digest.into())?;
+        let (signature, _) = self.signing_key.sign_prehash_recoverable(&digest)?;
         let bytes = signature.to_bytes();
         let mut arr = [0u8; 64];
         arr.copy_from_slice(&bytes);

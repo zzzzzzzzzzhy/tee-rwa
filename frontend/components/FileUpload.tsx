@@ -19,8 +19,10 @@ export function FileUpload({ onUpload, disabled }: FileUploadProps) {
   }, [])
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFiles(prev => [...prev, ...Array.from(e.target.files)])
+    const fileList = e.target.files
+    if (fileList) {
+      const newFiles = Array.from(fileList as ArrayLike<File>)
+      setFiles(prev => [...prev, ...newFiles])
     }
   }
 
