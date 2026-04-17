@@ -1,0 +1,12 @@
+include:
+  - ../occlum-template.yaml
+
+targets:
+  - name: tee-service
+    bins:
+      - name: tee-service
+        path: /bin/tee-service
+
+env:
+  default:
+    - OCCLUM=yes
